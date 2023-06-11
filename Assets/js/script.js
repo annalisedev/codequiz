@@ -7,9 +7,13 @@ var answer2 = document.querySelector('[data-number="2"]');
 var answer3 = document.querySelector('[data-number="3"]');
 var answer4 = document.querySelector('[data-number="4"]');
 var result = document.querySelector(".result");
+var finalScore = document.querySelector(".finalscore");
+var initialsInput = document.querySelector("#initials");
+var submitButton = document.querySelector("#submit");
 
 var timer;
 var timerCount;
+var counting;
 var questionorder;
 
 var quizQuestions = {
@@ -22,6 +26,7 @@ var quizQuestions = {
 function startQuiz() {
     document.getElementById("header").style.display = "none";
     document.getElementById("question").style.display = "inherit";
+    counting = true;
     startTimer();
     //show first question function
     console.log(Object.keys(quizQuestions)[0]);
@@ -56,20 +61,48 @@ selectedanswer.addEventListener("click", function(event) {
             timerCount = timerCount-10;
             result.textContent = "Wrong!";
         } 
+        document.getElementById("result").style.display = "inherit";
     }
 
     questionorder++;
-    startQuestion();
 
+    if(questionorder<(Object.keys(quizQuestions).length)) {
+        startQuestion();
+    } else {
+        allDone();
+    }
 })
+
+function allDone() {
+    document.getElementById("question").style.display = "none";
+    document.getElementById("alldone").style.display = "inherit";
+    document.getElementById("result").style.display = "none";
+    document.getElementById("timer").style.display = "none";
+
+    counting = false;
+
+    finalScore.textContent = "Your final score is " + timerCount;
+
+    submitButton.addEventListener("click", function(eventScore) {
+        eventScore.preventDefault();
+    
+    var player = {
+        initials: initialsInput.value.trim(),
+        score: timerCount,
+    };
+    
+    localStorage.setItem("playerDetails", JSON.stringify(player));
+    });
+    
+}
+
 
 function startTimer() {
     timerCount = 75;
-
     timer = setInterval(function() {
         timerCount--;
         timerElement.textContent = "Time: " + timerCount;
-        if (timerCount === 0) {
+        if (timerCount === 0 || counting === false)  {
         // Clears interval
         clearInterval(timer);
         //loseGame();
@@ -79,10 +112,3 @@ function startTimer() {
 
 startButton.addEventListener("click", startQuiz);
 
-
-/*
-answer1.addEventListener("click", selectAnswer(1));
-answer2.addEventListener("click", selectAnswer);
-answer3.addEventListener("click", selectAnswer);
-answer4.addEventListener("click", selectAnswer);
-*/

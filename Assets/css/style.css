@@ -58,10 +58,26 @@
 }
 
 .question {
-        display: none
+        display: none;
     }
 
 .result {
     border-top: 3px solid gray;
     color:grey;
+    display: none;
+}
+
+.alldone {
+    display: none;
+}
+
+.form{
+    padding: 15px;
+    margin: 0%
+}
+
+.finalscore {
+    padding: 5px;
+    color:#60044c;
+    font-weight: bold;
 }

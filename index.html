@@ -11,7 +11,7 @@
 <body>
     <nav>
         <div class="highscores"> View Highscores </div>
-        <div class="timer">75</div>
+        <div class="timer" id="timer"></div>
     </nav>
 
     <Header id="header">
@@ -21,19 +21,34 @@
     </Header>
 
     <main class="main">
-        <section class="question" id="question">
-            <h2 class="questionheader"></h2>
-            <div class="answeroptions">
-                <button class="answer" data-number="1"></button>
-                <button class="answer" data-number="2"></button>
-                <button class="answer" data-number="3"></button>
-                <button class="answer" data-number="4"></button>
-            </div>
-
-            <div class="result">
+        <section>
+            <div class="question" id="question">
+                <h2 class="questionheader"></h2>
+                <div class="answeroptions">
+                    <button class="answer" data-number="1"></button>
+                    <button class="answer" data-number="2"></button>
+                    <button class="answer" data-number="3"></button>
+                    <button class="answer" data-number="4"></button>
+                </div>
                 
             </div>
+
+            <div class="alldone" id="alldone"> 
+                <h1>All Done!</h1> 
+                <p class="finalscore"></p>
+                <form method="POST">
+                    <div class="input">
+                        <label for="initials"> Initials:</label>
+                        <input type="text" name="initials" id="initials" placeholder="type initials here" />
+                    </div>
+                    <button id="submit">Submit</button> 
+                </form>
+            </div>
+
+            <div  class="result" id="result"></div>
             
+            
+
         </section>
 
        
