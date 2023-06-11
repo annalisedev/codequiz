@@ -10,6 +10,7 @@ var result = document.querySelector(".result");
 var finalScore = document.querySelector(".finalscore");
 var initialsInput = document.querySelector("#initials");
 var submitButton = document.querySelector("#submit");
+var youlose = document.querySelector(".youlose");
 
 var timer;
 var timerCount;
@@ -28,13 +29,9 @@ function startQuiz() {
     document.getElementById("question").style.display = "inherit";
     counting = true;
     startTimer();
-    //show first question function
-    console.log(Object.keys(quizQuestions)[0]);
-    console.log(Object.keys(quizQuestions).length);
     questionorder = 0
     startQuestion();
 }
-
 
 function startQuestion() {
     questionHeader.textContent = "Q: " + (Object.keys(quizQuestions)[questionorder]);
@@ -51,13 +48,10 @@ selectedanswer.addEventListener("click", function(event) {
 
     if (element.matches(".answer")) {
         var number = element.getAttribute("data-number");
-        console.log(number);
 
         if(number===(Object.values(quizQuestions)[questionorder][4])) {
-            console.log("Correct");
             result.textContent = "Correct!";
         } else {
-            console.log("wrong");
             timerCount = timerCount-10;
             result.textContent = "Wrong!";
         } 
@@ -91,21 +85,37 @@ function allDone() {
         score: timerCount,
     };
     
-    localStorage.setItem("playerDetails", JSON.stringify(player));
-    });
-    
+
+    if ((localStorage.getItem("playerDetails"))===null) {
+        var scoreboard = [];
+        scoreboard.push(player);
+        localStorage.setItem("playerDetails", JSON.stringify(scoreboard));
+    } else {
+        var scoreboard = JSON.parse(localStorage.getItem("playerDetails"));
+        scoreboard.push(player);
+        scoreboard.sort((a,b) => b.score-a.score);
+        localStorage.setItem("playerDetails", JSON.stringify(scoreboard));
+    }
+
+    window.location.href="highscores.html";
+    });    
 }
 
+function timeElapsed() {
+    document.getElementById("question").style.display = "none";
+    youlose.style.display = "inherit";
+}
 
 function startTimer() {
     timerCount = 75;
     timer = setInterval(function() {
         timerCount--;
         timerElement.textContent = "Time: " + timerCount;
+        if (timerCount === 0) {
+            timeElapsed();
+        }
         if (timerCount === 0 || counting === false)  {
-        // Clears interval
-        clearInterval(timer);
-        //loseGame();
+        clearInterval(timer); 
       }        
     }, 1000)
 }

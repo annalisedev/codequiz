@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav>
-        <div class="highscores"> View Highscores </div>
+        <a class="highscores" href="highscores.html">View Highscores</a>
         <div class="timer" id="timer"></div>
     </nav>
 
@@ -25,10 +25,10 @@
             <div class="question" id="question">
                 <h2 class="questionheader"></h2>
                 <div class="answeroptions">
-                    <button class="answer" data-number="1"></button>
-                    <button class="answer" data-number="2"></button>
-                    <button class="answer" data-number="3"></button>
-                    <button class="answer" data-number="4"></button>
+                    <button class="answer answerbutton" data-number="1"></button>
+                    <button class="answer answerbutton" data-number="2"></button>
+                    <button class="answer answerbutton" data-number="3"></button>
+                    <button class="answer answerbutton" data-number="4"></button>
                 </div>
                 
             </div>
@@ -45,16 +45,14 @@
                 </form>
             </div>
 
+            <div class="youlose">
+                <h2>You ran out of time!</h2>
+                <button onclick="window.location.href='index.html';">Start Again</button>
+            </div>
+
             <div  class="result" id="result"></div>
-            
-            
-
         </section>
-
-       
-
     </main> 
-
     <script src="assets/js/script.js"></script>
 </body>
 </html>
