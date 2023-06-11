@@ -2,7 +2,7 @@
 
 ## Link to Deployed Application
 
-A link to the deployed application can be found here: 
+A link to the deployed application can be found here: https://annalisedev.github.io/codequiz/
 
 ## Description
 
@@ -15,7 +15,7 @@ The Github Repository can be found here: https://github.com/annalisedev/codequiz
 ## Screenshot
 
 A screenshot of the deployed application can be found in assets:
-
+![ScreenshotofApplication](./assets/images/CodeQuizScreenshot.png)
 
 ## Support
 
