@@ -24,6 +24,7 @@ var quizQuestions = {
     'Which function is used to serialise an object into a JSON string in Javascript?': ['stringify()', 'parse()', 'convert()', 'None of the above', '3']
 }
 
+// Kick off quiz once start button is selected. Hide the header page and show div with first question. Timer starts.
 function startQuiz() {
     document.getElementById("header").style.display = "none";
     document.getElementById("question").style.display = "inherit";
@@ -33,6 +34,7 @@ function startQuiz() {
     startQuestion();
 }
 
+// Function to allow for the multiple questions to be selected as the question order goes up and the player progresses.
 function startQuestion() {
     questionHeader.textContent = "Q: " + (Object.keys(quizQuestions)[questionorder]);
     answer1.textContent = "1. " + (Object.values(quizQuestions)[questionorder][0]);
@@ -41,6 +43,7 @@ function startQuestion() {
     answer4.textContent = "4. " + (Object.values(quizQuestions)[questionorder][3]);
 }
 
+// Event listener to identify which button was clicked and whether this (1,2,3,4) matches the answer (final number in value array). If not removes 10 seconds from timer.
 var selectedanswer = document.querySelector(".answeroptions");
 
 selectedanswer.addEventListener("click", function(event) {
@@ -60,6 +63,7 @@ selectedanswer.addEventListener("click", function(event) {
 
     questionorder++;
 
+    // Take user to next question if there are any left, otherwise take them to All Done page to submit their initials.
     if(questionorder<(Object.keys(quizQuestions).length)) {
         startQuestion();
     } else {
@@ -67,6 +71,7 @@ selectedanswer.addEventListener("click", function(event) {
     }
 })
 
+// Hide all other elements (divs) and only show All done section. Stop timer and display time left. Store input details into local storage. Create array for this if it doesnt already exist.
 function allDone() {
     document.getElementById("question").style.display = "none";
     document.getElementById("alldone").style.display = "inherit";
@@ -101,11 +106,13 @@ function allDone() {
     });    
 }
 
+// If timer finishes before quiz does, end game.
 function timeElapsed() {
     document.getElementById("question").style.display = "none";
     youlose.style.display = "inherit";
 }
 
+// Starts timer, defines time and displays countdown in one second increments.
 function startTimer() {
     timerCount = 75;
     timer = setInterval(function() {

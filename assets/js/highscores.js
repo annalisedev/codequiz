@@ -30,11 +30,14 @@ function createTableFromObjects(data) {
     return table;
   }
 
+
+// Pull items from local storage to arrage in table created above
 var scoreboard = JSON.parse(localStorage.getItem("playerDetails"));
 var table = createTableFromObjects(scoreboard);
 
 tableContainer.appendChild(table);
 
+//Button to allow user to clear local storage high scores
 clearScoreButton.addEventListener("click", clearStorage);
 
 function clearStorage() {
